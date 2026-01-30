@@ -1,0 +1,48 @@
+SMS Spam Classifier
+
+Here we build a machine learning pipeline to classify SMS messages as either Spam or Ham (legitimate). Using the UCI SMS Spam Collection Dataset, we compare three benchmark models—Naive Bayes, Logistic Regression, and Random Forest—to determine the most effective classifier for filtering unwanted messages.
+
+The project is structured into two main stages:
+
+1. prepare.ipynb: Data ingestion, cleaning, preprocessing, and splitting.
+
+2. train.ipynb: Model training, evaluation, hyperparameter tuning, and final selection.
+
+Repository Structure
+
+├── prepare.ipynb            # Notebook for data loading & preprocessing
+├── train.ipynb              # Notebook for model training & evaluation
+├── SMSSpamCollection        # Raw dataset (downloaded by prepare.ipynb)
+├── train.csv                # Processed Training set (70%)
+├── validation.csv           # Processed Validation set (15%)
+├── test.csv                 # Processed Test set (15%)
+├── best_spam_classifier.pkl # Saved final model (serialized)
+└── README.md                # Project documentation
+
+Tech Stack
+- Language: Python 3.x
+- Libraries:
+
+1. pandas (Data manipulation)
+2. scikit-learn (Modeling, Pipeline, GridSearch)
+3. nltk (Text preprocessing: Stemming, Stopwords)
+4. joblib (Model serialization)
+
+Step 1: Data Preparation
+Run prepare.ipynb first. This notebook handles the entire ETL process:
+1. Downloads the dataset directly from the UCI Archive.
+2. Cleans Text: Applies Lowercasing, Regex (keeping only alphabets), Tokenization, Stopword Removal, and Porter Stemming.
+3. Encodes Labels: Converts spam -> 1 and ham -> 0.
+4. Splits Data: Performs a stratified split into train.csv, validation.csv, and test.csv.
+
+
+Step 2: Model Training
+Run train.ipynb second. This notebook handles the machine learning workflow:
+1. Loads Splits: Reads the CSVs created in Step 1.
+2. Builds Pipelines: Combines TfidfVectorizer with classifiers to prevent data leakage.
+3. Fine-Tuning: Uses GridSearchCV to optimize hyperparameters (e.g., n-grams, regularization).
+4. Selection: Evaluates the best versions of all models on the held-out Test set.
+5. Export: Saves the winning model as best_spam_classifier.pkl.
+
+Results & Performance
+After fine-tuning, the Multinomial Naive Bayes classifier was selected as the best model. It achieved the highest F1-Score, balancing the need to catch spam without accidentally blocking real messages.
