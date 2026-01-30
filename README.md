@@ -1,3 +1,3 @@
-Applied Machine Learning
+# Applied Machine Learning
 
 Repository for Applied Machine Learning Course
