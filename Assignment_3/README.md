@@ -4,7 +4,7 @@
 This repository contains a machine learning pipeline for classifying SMS/Email messages as Spam or Ham. It fulfills all requirements for Assignment 3, including a robust scoring script, a Flask API for model serving, and a comprehensive `pytest` suite that achieves 97%+ coverage.
 
 ## Repository Structure
-* - `best_spam_classifier.pkl`: The champion SVM model pipeline (this is the best model taken from Assignment 2)
+* `best_spam_classifier.pkl`: The champion SVM model pipeline (this is the best model taken from Assignment 2)
 * `score.py`: Contains the `score(text, model, threshold)` function which evaluates raw text using the trained model.
 * `app.py`: A Flask web server that serves the model via a `/score` POST endpoint. (Also includes a bonus web UI at the `/` route for easy manual testing).
 * `test.py`: A comprehensive test suite containing 19 tests covering unit tests, live server integration, and simulated server crashes.
@@ -37,4 +37,5 @@ The `test_flask_...` functions handle the integration testing requirement:
 ## 4. Coverage Report (`coverage.txt`)
 The coverage report was generated using the following command:
 ```bash
+
 uv run pytest test.py --cov=score --cov=app --cov=test --cov-report=term > coverage.txt
